@@ -3,13 +3,13 @@ import {MessageService} from './message.service'
 
 @Component({
     selector: 'chatbot',
-    template: `<h1>Car Assistant</h1>
+    template: `<h3>Car Assistant</h3>
     <chat></chat>
     <userinput></userinput>`,
     styles:[`
-    
-    h1{
-        color:blue;
+    h3{
+        color:#2874A6;
+        text-align:center;
         }`
 
     ],

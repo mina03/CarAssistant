@@ -8,6 +8,7 @@ import { AppComponent }  from './app.component';
 import { ChatBotComponent} from './chatbot.component';
 import { ChatComponent} from './chat.component';
 import { UserInputComponent} from './userinput.component';
+import { ConversationResponse} from './conversationresponse';
 
 import { SignUpFormComponent} from './signupform.component';
 import { HttpModule, JsonpModule } from '@angular/http'

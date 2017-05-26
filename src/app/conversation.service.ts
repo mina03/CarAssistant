@@ -8,6 +8,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import {ConversationResponse} from './conversationresponse'
 
 @Injectable()
 export class ConversationService {
@@ -29,10 +30,11 @@ export class ConversationService {
         let options       = new RequestOptions({ headers: headers }); // Create a request option
 
         let data = this.http.post(this.conversationServiceUrl, body, options) // ...using post request
-                         .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
+                         .map(res => <ConversationResponse>res.json()) // ...and calling .json() on the response to return data
                          .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
         //let dataStr = JSON.stringify(data);
-        alert(data)
+        //let obj = JSON.parse(JSON.stringify(data));
+        //alert(data);
         return data
     }  
 }

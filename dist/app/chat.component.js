@@ -11,23 +11,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var message_service_1 = require("./message.service");
 var conversation_service_1 = require("./conversation.service");
+var message_1 = require("./message");
 var ChatComponent = (function () {
     function ChatComponent(messageservice, conversationservice) {
         this.messageservice = messageservice;
         this.conversationservice = conversationservice;
         this.messages = [];
-        this.index = 0;
+        this.index = -1;
+        this.chatTypeClass = "chatTypeMe";
+        // [ngStyle]="{ 'background-image': 'url(' + imgPath + ')'}"
+        //imgPath:string = "images/request.png";
         this.conversationResponse = "";
     }
     ChatComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.messageservice.msgBroadcaster.subscribe(function (data) {
-            _this.messages[_this.index] = data;
             _this.index++;
+            _this.chatTypeClass = "chatTypeMe";
+            var message = new message_1.Message(_this.chatTypeClass, data);
+            _this.messages[_this.index] = message;
+            //alert(this.messages[this.index].data);
+            _this.fetchConversationResponse(data);
         });
-        this.conversationservice.fetchResponse({ "input": { "text": "hi" } }).subscribe(function (conversationResponse) {
+        this.fetchConversationResponse("");
+    };
+    ChatComponent.prototype.fetchConversationResponse = function (data) {
+        var _this = this;
+        this.conversationservice.fetchResponse({ "input": { "text": data } }).subscribe(function (conversationResponse) {
             _this.conversationResponse = conversationResponse;
-            alert(_this.conversationResponse);
+            var str = JSON.stringify(_this.conversationResponse);
+            var obj = JSON.parse(str);
+            //alert(obj.output.text);
+            _this.index++;
+            _this.chatTypeClass = "chatTypeBot";
+            var message = new message_1.Message(_this.chatTypeClass, obj.output.text);
+            _this.messages[_this.index] = message;
         });
     };
     return ChatComponent;
@@ -35,8 +53,8 @@ var ChatComponent = (function () {
 ChatComponent = __decorate([
     core_1.Component({
         selector: 'chat',
-        template: "<div id=\"chat_container\" style=\"overflow-y: scroll; height:400px;\">\n               <table>\n                <tr *ngFor=\"let mesg of messages\"><td>{{mesg}}</td>\n                </tr>    \n                </table>\n                </div>\n               ",
-        styles: ["\n    "
+        template: "<div id=\"chat_container\" style=\"overflow-y: scroll; height:400px;\">\n               <table>\n                <tr *ngFor=\"let mesg of messages\" class={{mesg.type}}><td>{{mesg.data}}</td>\n                </tr>    \n                </table>\n                </div>\n               ",
+        styles: ["\n\n    div {\n        border: 1px solid black;\n        width:800px;\n        display:block;\n        margin-left:auto;\n        margin-right:auto;\n    }\n    table {\n        width:inherit;\n    }\n    tr {\n        height:30px;\n        width:inherit;\n    }\n    .chatTypeMe {\n        background-color:#D3D3D3;\n        text-align:left;\n    }\n    .chatTypeBot {\n        background-color:#F0F8FF;\n        text-align:right;\n    }\n    "
         ],
         providers: [conversation_service_1.ConversationService]
     }),
