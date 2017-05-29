@@ -19,6 +19,7 @@ var ChatComponent = (function () {
         this.messages = [];
         this.index = -1;
         this.chatTypeClass = "chatTypeMe";
+        this.conversationContext = "";
         // [ngStyle]="{ 'background-image': 'url(' + imgPath + ')'}"
         //imgPath:string = "images/request.png";
         this.conversationResponse = "";
@@ -37,7 +38,14 @@ var ChatComponent = (function () {
     };
     ChatComponent.prototype.fetchConversationResponse = function (data) {
         var _this = this;
-        this.conversationservice.fetchResponse({ "input": { "text": data } }).subscribe(function (conversationResponse) {
+        if (this.conversationContext == "") {
+            this.postData = { "input": { "text": data } };
+        }
+        else {
+            // add the context
+            this.postData = { "input": { "text": data }, "context": this.conversationContext };
+        }
+        this.conversationservice.fetchResponse(this.postData).subscribe(function (conversationResponse) {
             _this.conversationResponse = conversationResponse;
             var str = JSON.stringify(_this.conversationResponse);
             var obj = JSON.parse(str);
@@ -45,6 +53,7 @@ var ChatComponent = (function () {
             _this.index++;
             _this.chatTypeClass = "chatTypeBot";
             var message = new message_1.Message(_this.chatTypeClass, obj.output.text);
+            _this.conversationContext = obj.context;
             _this.messages[_this.index] = message;
         });
     };

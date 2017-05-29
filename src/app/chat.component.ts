@@ -45,6 +45,8 @@ export class ChatComponent implements OnInit {
     messages:any[]= [];
     index:number = -1;
     chatTypeClass:string = "chatTypeMe"; 
+    conversationContext:string = "";
+    postData:any;
     // [ngStyle]="{ 'background-image': 'url(' + imgPath + ')'}"
     //imgPath:string = "images/request.png";
     conversationResponse:any = "";
@@ -65,7 +67,16 @@ export class ChatComponent implements OnInit {
 
     fetchConversationResponse(data:string)
     {
-        this.conversationservice.fetchResponse({"input":{"text":data}}).subscribe(conversationResponse=>{
+        if(this.conversationContext == "")
+        {
+            this.postData = {"input":{"text":data}}
+        }
+        else
+        {
+            // add the context
+            this.postData = {"input":{"text":data}, "context":this.conversationContext}
+        }
+        this.conversationservice.fetchResponse(this.postData).subscribe(conversationResponse=>{
             this.conversationResponse = conversationResponse;
             
             let str = JSON.stringify(this.conversationResponse);
@@ -74,7 +85,8 @@ export class ChatComponent implements OnInit {
             this.index++;
             this.chatTypeClass = "chatTypeBot";
             let message = new Message(this.chatTypeClass,obj.output.text)
-            this.messages[this.index] = message;     
+            this.conversationContext = obj.context;
+            this.messages[this.index] = message;
     });
     }
 }
