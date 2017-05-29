@@ -20,8 +20,6 @@ var ChatComponent = (function () {
         this.index = -1;
         this.chatTypeClass = "chatTypeMe";
         this.conversationContext = "";
-        // [ngStyle]="{ 'background-image': 'url(' + imgPath + ')'}"
-        //imgPath:string = "images/request.png";
         this.conversationResponse = "";
     }
     ChatComponent.prototype.ngOnInit = function () {
@@ -31,7 +29,6 @@ var ChatComponent = (function () {
             _this.chatTypeClass = "chatTypeMe";
             var message = new message_1.Message(_this.chatTypeClass, data);
             _this.messages[_this.index] = message;
-            //alert(this.messages[this.index].data);
             _this.fetchConversationResponse(data);
         });
         this.fetchConversationResponse("");
@@ -49,7 +46,6 @@ var ChatComponent = (function () {
             _this.conversationResponse = conversationResponse;
             var str = JSON.stringify(_this.conversationResponse);
             var obj = JSON.parse(str);
-            //alert(obj.output.text);
             _this.index++;
             _this.chatTypeClass = "chatTypeBot";
             var message = new message_1.Message(_this.chatTypeClass, obj.output.text);
@@ -63,7 +59,7 @@ ChatComponent = __decorate([
     core_1.Component({
         selector: 'chat',
         template: "<div id=\"chat_container\" style=\"overflow-y: scroll; height:400px;\">\n               <table>\n                <tr *ngFor=\"let mesg of messages\" class={{mesg.type}}><td>{{mesg.data}}</td>\n                </tr>    \n                </table>\n                </div>\n               ",
-        styles: ["\n\n    div {\n        border: 1px solid black;\n        width:800px;\n        display:block;\n        margin-left:auto;\n        margin-right:auto;\n    }\n    table {\n        width:inherit;\n    }\n    tr {\n        height:30px;\n        width:inherit;\n    }\n    .chatTypeMe {\n        background-color:#D3D3D3;\n        text-align:left;\n    }\n    .chatTypeBot {\n        background-color:#F0F8FF;\n        text-align:right;\n    }\n    "
+        styles: ["\n    div {\n        border: 1px solid black;\n        width:800px;\n        display:block;\n        margin-left:auto;\n        margin-right:auto;\n    }\n    table {\n        width:inherit;\n    }\n    tr {\n        height:30px;\n        width:inherit;\n    }\n    .chatTypeMe {\n        background-color:#D3D3D3;\n        text-align:left;\n    }\n    .chatTypeBot {\n        background-color:#F0F8FF;\n        text-align:right;\n    }\n    "
         ],
         providers: [conversation_service_1.ConversationService]
     }),

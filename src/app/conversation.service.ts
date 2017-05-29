@@ -2,13 +2,11 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {RequestOptions} from '@angular/http';
 import {Headers} from '@angular/http';
-import {Response} from '@angular/http';
-import {RequestOptionsArgs} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {ConversationResponse} from './conversationresponse'
+import {ConversationResponse} from './conversationresponse';
 
 @Injectable()
 export class ConversationService {
@@ -32,9 +30,6 @@ export class ConversationService {
         let data = this.http.post(this.conversationServiceUrl, body, options) // ...using post request
                          .map(res => <ConversationResponse>res.json()) // ...and calling .json() on the response to return data
                          .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
-        //let dataStr = JSON.stringify(data);
-        //let obj = JSON.parse(JSON.stringify(data));
-        //alert(data);
         return data
     }  
 }

@@ -13,7 +13,6 @@ var app_component_1 = require("./app.component");
 var chatbot_component_1 = require("./chatbot.component");
 var chat_component_1 = require("./chat.component");
 var userinput_component_1 = require("./userinput.component");
-var signupform_component_1 = require("./signupform.component");
 var http_1 = require("@angular/http");
 var routes = [
     {
@@ -29,7 +28,7 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule, router_1.RouterModule.forRoot(routes)],
-        declarations: [app_component_1.AppComponent, chatbot_component_1.ChatBotComponent, chat_component_1.ChatComponent, userinput_component_1.UserInputComponent, signupform_component_1.SignUpFormComponent],
+        declarations: [app_component_1.AppComponent, chatbot_component_1.ChatBotComponent, chat_component_1.ChatComponent, userinput_component_1.UserInputComponent],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

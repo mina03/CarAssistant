@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MessageService} from './message.service'
+import {MessageService} from './message.service';
 
 @Component({
     selector: 'userinput',
@@ -26,7 +26,7 @@ export class UserInputComponent implements OnInit {
     ngOnInit() { }
     sendMsg(msgInput:string):void{
         //invoke the service
-        this.messageservice.sendMsg(msgInput)
-        this.msg = "";
+        this.messageservice.sendMsg(msgInput);
+        this.msg = '';
     }
 }

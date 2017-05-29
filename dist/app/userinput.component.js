@@ -19,7 +19,7 @@ var UserInputComponent = (function () {
     UserInputComponent.prototype.sendMsg = function (msgInput) {
         //invoke the service
         this.messageservice.sendMsg(msgInput);
-        this.msg = "";
+        this.msg = '';
     };
     return UserInputComponent;
 }());

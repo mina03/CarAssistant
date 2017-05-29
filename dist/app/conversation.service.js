@@ -36,9 +36,6 @@ var ConversationService = (function () {
         var data = this.http.post(this.conversationServiceUrl, body, options) // ...using post request
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
             .catch(function (error) { return Observable_1.Observable.throw(error.json().error || 'Server error'); }); //...errors if any
-        //let dataStr = JSON.stringify(data);
-        //let obj = JSON.parse(JSON.stringify(data));
-        //alert(data);
         return data;
     };
     return ConversationService;

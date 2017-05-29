@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MessageService} from './message.service'
+import {MessageService} from './message.service';
 
 @Component({
     selector: 'chatbot',
@@ -11,7 +11,6 @@ import {MessageService} from './message.service'
         color:#2874A6;
         text-align:center;
         }`
-
     ],
     providers:[MessageService]
 })
