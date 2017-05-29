@@ -59,7 +59,6 @@ export class ChatComponent implements OnInit {
             this.chatTypeClass = "chatTypeMe";
             let message = new Message(this.chatTypeClass,data) 
             this.messages[this.index] = message;
-            //alert(this.messages[this.index].data);
             this.fetchConversationResponse(data);
         })
         this.fetchConversationResponse("");
@@ -81,7 +80,6 @@ export class ChatComponent implements OnInit {
             
             let str = JSON.stringify(this.conversationResponse);
             let obj = JSON.parse(str);
-            //alert(obj.output.text);
             this.index++;
             this.chatTypeClass = "chatTypeBot";
             let message = new Message(this.chatTypeClass,obj.output.text)
