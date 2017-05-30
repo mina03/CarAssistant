@@ -6,19 +6,21 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {ConversationResponse} from './conversationresponse';
+import {WeatherResponse} from './weatherresponse';
 
 @Injectable()
-export class ConversationService {
-    conversationServiceUrl = 'https://gateway.watsonplatform.net/conversation/api/v1/workspaces/2c617169-0ba6-4f83-a76f-85d887e311f8/message/?version=2017-05-23';
+export class WeatherService {
+    weatherServiceUrl = 'http://demo2699551.mockable.io/';
     constructor(private http:Http) {}
-    fetchResponse (body: Object): Observable<any> {
+
+    getWeatherUpdates(body:Object): Observable<any> {
         let bodyString = JSON.stringify(body); // Stringify payload
         let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options       = new RequestOptions({ headers: headers }); // Create a request option
-        let data = this.http.post(this.conversationServiceUrl, body, options) // ...using post request
-                         .map(res => <ConversationResponse>res.json()) // ...and calling .json() on the response to return data
+
+        let data = this.http.post(this.weatherServiceUrl, body, options) // ...using post request
+                         .map(res => res.json()) // ...and calling .json() on the response to return data
                          .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
-        return data;
+        return data
     }  
 }

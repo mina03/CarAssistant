@@ -17,7 +17,6 @@ var UserInputComponent = (function () {
     }
     UserInputComponent.prototype.ngOnInit = function () { };
     UserInputComponent.prototype.sendMsg = function (msgInput) {
-        //invoke the service
         this.messageservice.sendMsg(msgInput);
         this.msg = '';
     };
@@ -27,7 +26,7 @@ UserInputComponent = __decorate([
     core_1.Component({
         selector: 'userinput',
         template: "\n    <div>\n    Enter Message: <input type=\"text\" #msgInput [(ngModel)]=\"msg\"><button (click)=\"sendMsg(msgInput.value)\">Send Message</button>\n    </div>",
-        styles: ["\n    \n    div{\n        margin-left: auto;\n        margin-right: auto;\n        width:650px;\n    }\n    input{\n        width:400px;\n        }"
+        styles: ["\n    div{\n        margin-left: auto;\n        margin-right: auto;\n        width:650px;\n    }\n    input{\n        width:400px;\n        }"
         ]
     }),
     __metadata("design:paramtypes", [message_service_1.MessageService])

@@ -16,25 +16,25 @@ require("rxjs/add/operator/toPromise");
 require("rxjs/add/operator/catch");
 var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
-var ConversationService = (function () {
-    function ConversationService(http) {
+var WeatherService = (function () {
+    function WeatherService(http) {
         this.http = http;
-        this.conversationServiceUrl = 'https://gateway.watsonplatform.net/conversation/api/v1/workspaces/2c617169-0ba6-4f83-a76f-85d887e311f8/message/?version=2017-05-23';
+        this.weatherServiceUrl = 'http://demo2699551.mockable.io/';
     }
-    ConversationService.prototype.fetchResponse = function (body) {
+    WeatherService.prototype.getWeatherUpdates = function (body) {
         var bodyString = JSON.stringify(body); // Stringify payload
         var headers = new http_3.Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         var options = new http_2.RequestOptions({ headers: headers }); // Create a request option
-        var data = this.http.post(this.conversationServiceUrl, body, options) // ...using post request
+        var data = this.http.post(this.weatherServiceUrl, body, options) // ...using post request
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
             .catch(function (error) { return Observable_1.Observable.throw(error.json().error || 'Server error'); }); //...errors if any
         return data;
     };
-    return ConversationService;
+    return WeatherService;
 }());
-ConversationService = __decorate([
+WeatherService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http])
-], ConversationService);
-exports.ConversationService = ConversationService;
-//# sourceMappingURL=conversation.service.js.map
+], WeatherService);
+exports.WeatherService = WeatherService;
+//# sourceMappingURL=weather.service.js.map

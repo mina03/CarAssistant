@@ -15,7 +15,6 @@ import {MessageService} from './message.service';
     providers:[MessageService]
 })
 export class ChatBotComponent implements OnInit {
-    
     constructor() { }
     ngOnInit() { }
 }

@@ -6,16 +6,11 @@ import { AppComponent }  from './app.component';
 import { ChatBotComponent} from './chatbot.component';
 import { ChatComponent} from './chat.component';
 import { UserInputComponent} from './userinput.component';
-import { ConversationResponse} from './conversationresponse';
 import { HttpModule, JsonpModule } from '@angular/http';
 
-const routes:Routes= [
-  {
+const routes:Routes= [{
     path:'',
-    component:ChatBotComponent
-  }
-
-];
+    component:ChatBotComponent}];
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, JsonpModule, RouterModule.forRoot(routes)],
