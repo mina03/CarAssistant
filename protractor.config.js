@@ -20,7 +20,7 @@ exports.config = {
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
-    'browserName': 'safari'
+    'browserName': 'chrome'
   },
 
   // Framework to use. Jasmine is recommended.
@@ -34,7 +34,7 @@ exports.config = {
   useAllAngular2AppRoots: true,
 
   // Base URL for application server
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'http://localhost:8080',
 
   // doesn't seem to work.
   // resultJsonOutputFile: "foo.json",
