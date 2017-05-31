@@ -19,7 +19,9 @@ require("rxjs/add/operator/map");
 var ConversationService = (function () {
     function ConversationService(http) {
         this.http = http;
-        this.conversationServiceUrl = 'https://gateway.watsonplatform.net/conversation/api/v1/workspaces/2c617169-0ba6-4f83-a76f-85d887e311f8/message/?version=2017-05-23';
+        this.conversationId = '2c617169-0ba6-4f83-a76f-85d887e311f8';
+        this.version = '2017-05-23';
+        this.conversationServiceUrl = 'https://gateway.watsonplatform.net/conversation/api/v1/workspaces/' + this.conversationId + '/message/?version=' + this.version;
     }
     ConversationService.prototype.fetchResponse = function (body) {
         var bodyString = JSON.stringify(body); // Stringify payload
