@@ -84,7 +84,7 @@ var ChatComponent = (function () {
 ChatComponent = __decorate([
     core_1.Component({
         selector: 'chat',
-        template: "<div id=\"chat_container\" style=\"overflow-y: scroll; height:400px;\">\n               <table>\n                <tr *ngFor=\"let mesg of messages\" class={{mesg.type}}><td>{{mesg.data}}</td>\n                </tr>    \n                </table>\n                </div>\n               ",
+        template: "<div id=\"chat_container\" style=\"overflow-y: scroll; height:500px;\">\n               <table>\n                <tr *ngFor=\"let mesg of messages\" class={{mesg.type}}><td>{{mesg.data}}</td>\n                </tr>    \n                </table>\n                </div>\n               ",
         styles: ["\n    div {\n        border: 1px solid black;\n        width:800px;\n        display:block;\n        margin-left:auto;\n        margin-right:auto;\n    }\n    table {\n        width:inherit;\n    }\n    tr {\n        height:30px;\n        width:inherit;\n    }\n    .chatTypeMe {\n        background-color:#D3D3D3;\n        text-align:left;\n    }\n    .chatTypeBot {\n        background-color:#F0F8FF;\n        text-align:right;\n    }\n    "
         ],
         providers: [conversation_service_1.ConversationService, weather_service_1.WeatherService]

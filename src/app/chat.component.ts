@@ -6,7 +6,7 @@ import {Message} from './message';
 
 @Component({
     selector: 'chat',
-    template: `<div id="chat_container" style="overflow-y: scroll; height:400px;">
+    template: `<div id="chat_container" style="overflow-y: scroll; height:500px;">
                <table>
                 <tr *ngFor="let mesg of messages" class={{mesg.type}}><td>{{mesg.data}}</td>
                 </tr>    
