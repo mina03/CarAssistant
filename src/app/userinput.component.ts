@@ -23,7 +23,12 @@ export class UserInputComponent implements OnInit {
     constructor(private messageservice:MessageService) { }
     ngOnInit() { }
     sendMsg(msgInput:string):void{ //invoke the service
-        this.messageservice.sendMsg(msgInput);
-        this.msg = '';
+        if(msgInput === ''){
+            alert('Please enter a query');
+        }
+        else{
+            this.messageservice.sendMsg(msgInput);
+            this.msg = '';
+        }
     }
 }

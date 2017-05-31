@@ -17,8 +17,13 @@ var UserInputComponent = (function () {
     }
     UserInputComponent.prototype.ngOnInit = function () { };
     UserInputComponent.prototype.sendMsg = function (msgInput) {
-        this.messageservice.sendMsg(msgInput);
-        this.msg = '';
+        if (msgInput === '') {
+            alert('Please enter a query');
+        }
+        else {
+            this.messageservice.sendMsg(msgInput);
+            this.msg = '';
+        }
     };
     return UserInputComponent;
 }());
