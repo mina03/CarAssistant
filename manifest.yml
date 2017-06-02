@@ -1,0 +1,7 @@
+applications:
+- name: Car Assistant
+  random-route: true
+  memory: 64M
+  host: car-assistant
+  buildpack: staticfile_buildpack
+  
