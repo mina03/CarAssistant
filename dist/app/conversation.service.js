@@ -19,8 +19,9 @@ require("rxjs/add/operator/map");
 var ConversationService = (function () {
     function ConversationService(http) {
         this.http = http;
-        this.conversationId = '2c617169-0ba6-4f83-a76f-85d887e311f8';
-        this.version = '2017-05-23';
+        this.conversationId = '9d9b525b-3576-4741-a873-8482a73d3d93';
+        this.version = '2017-07-07';
+        this.nodeAppUrl = 'http://localhost:6002/api/message';
         this.conversationServiceUrl = 'https://gateway.watsonplatform.net/conversation/api/v1/workspaces/' + this.conversationId + '/message/?version=' + this.version;
     }
     ConversationService.prototype.fetchResponse = function (body) {

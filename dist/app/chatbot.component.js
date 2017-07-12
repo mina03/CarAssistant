@@ -19,7 +19,7 @@ var ChatBotComponent = (function () {
 ChatBotComponent = __decorate([
     core_1.Component({
         selector: 'chatbot',
-        template: "<h3>Car Assistant</h3>\n    <chat></chat>\n    <userinput></userinput>",
+        template: "<h3>Chatbot</h3>\n    <chat></chat>\n    <userinput></userinput>",
         styles: ["\n    h3{\n        color:#2874A6;\n        text-align:center;\n        }"
         ],
         providers: [message_service_1.MessageService]

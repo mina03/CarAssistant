@@ -10,8 +10,9 @@ import {ConversationResponse} from './conversationresponse';
 
 @Injectable()
 export class ConversationService {
-    conversationId = '2c617169-0ba6-4f83-a76f-85d887e311f8';
-    version = '2017-05-23';
+    conversationId = '9d9b525b-3576-4741-a873-8482a73d3d93';
+    version = '2017-07-07';
+    nodeAppUrl = 'http://localhost:6002/api/message';
     conversationServiceUrl = 'https://gateway.watsonplatform.net/conversation/api/v1/workspaces/'+this.conversationId+'/message/?version='+this.version;
     constructor(private http:Http) {}
     fetchResponse (body: Object): Observable<any> {

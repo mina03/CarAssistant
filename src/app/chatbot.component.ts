@@ -3,7 +3,7 @@ import {MessageService} from './message.service';
 
 @Component({
     selector: 'chatbot',
-    template: `<h3>Car Assistant</h3>
+    template: `<h3>Chatbot</h3>
     <chat></chat>
     <userinput></userinput>`,
     styles:[`

@@ -52,26 +52,49 @@ var ChatComponent = (function () {
             _this.index++;
             _this.chatTypeClass = 'chatTypeBot';
             var responseMesg = '';
-            if (obj.output.text != '') {
-                responseMesg = obj.output.text;
+            //if(obj.output.text != '') {
+            responseMesg = obj.output.text;
+            _this.appendMessage(responseMesg, obj);
+            if (obj.output.action === 'check_ticket_exists') {
+                // Make api call to check if ticket exists
+                responseMesg = 'Ticket does not exist. I shall create the ticket with Category: ' + obj.context.category + ' and Sub-Category: ' + obj.context.sub_category + '. Would you like to add urgency? (Enter Yes/No)';
                 _this.appendMessage(responseMesg, obj);
             }
-            else {
-                if (obj.output.action === 'fetch_time') {
-                    responseMesg = 'Current time is ' + new Date().toLocaleTimeString();
-                    _this.appendMessage(responseMesg, obj);
+            else if (obj.output.action === 'create_ticket') {
+                // Make api call to create ticket
+                if (obj.context.Urgency === undefined && obj.context.comments === undefined) {
+                    responseMesg = 'Thanks for the information. A ticket with default urgency(Low) has been created. We will get back to you soon.';
                 }
-                else if (obj.output.action === 'fetch_date') {
-                    responseMesg = 'Current date is ' + new Date().toLocaleDateString();
-                    _this.appendMessage(responseMesg, obj);
+                else if (obj.context.Urgency != undefined && obj.context.comments === undefined) {
+                    responseMesg = 'Thanks for the information. A ticket with Urgency: ' + obj.context.Urgency + ' has been created. We will get back to you soon.';
                 }
-                else if (obj.output.action === 'fetch_weather') {
-                    _this.weatherservice.getWeatherUpdates({ 'lat': 15.57, 'long': 73.32 }).subscribe(function (weatherResponse) {
-                        responseMesg = weatherResponse;
-                        _this.appendMessage(responseMesg, obj);
-                    });
+                else if (obj.context.Urgency === undefined && obj.context.comments != undefined) {
+                    responseMesg = 'Thanks for the information. A ticket with default urgency(Low) and Comments: ' + obj.context.comments + ' has been created. We will get back to you soon.';
                 }
+                else {
+                    responseMesg = 'Thanks for the information. A ticket with Urgency: ' + obj.context.Urgency + ' and Comments: ' + obj.context.comments + ' has been created. We will get back to you soon.';
+                }
+                _this.appendMessage(responseMesg, obj);
+                obj.context.Urgency = undefined;
+                obj.context.comments = undefined;
             }
+            //}
+            //     else {
+            //         if (obj.output.action === 'fetch_time') {
+            //             responseMesg = 'Current time is '+new Date().toLocaleTimeString();
+            //             this.appendMessage(responseMesg,obj);
+            //         }
+            //         else if (obj.output.action === 'fetch_date') {
+            //             responseMesg = 'Current date is '+new Date().toLocaleDateString();
+            //             this.appendMessage(responseMesg,obj);
+            //         }
+            //         else if (obj.output.action === 'fetch_weather') {
+            //             this.weatherservice.getWeatherUpdates({'lat':15.57,'long':73.32}).subscribe(weatherResponse=>{
+            //             responseMesg = weatherResponse;
+            //             this.appendMessage(responseMesg,obj);
+            //         });
+            //     }
+            // }         
         });
     };
     ChatComponent.prototype.appendMessage = function (responseMesg, obj) {

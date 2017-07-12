@@ -75,26 +75,55 @@ export class ChatComponent implements OnInit {
             this.index++;
             this.chatTypeClass = 'chatTypeBot';
             let responseMesg = '';
-            if(obj.output.text != '') {
+            //if(obj.output.text != '') {
                 responseMesg = obj.output.text;
                 this.appendMessage(responseMesg,obj);
-            }
-            else {
-                if (obj.output.action === 'fetch_time') {
-                    responseMesg = 'Current time is '+new Date().toLocaleTimeString();
+                if(obj.output.action === 'check_ticket_exists')
+                {
+                    // Make api call to check if ticket exists
+                    responseMesg = 'Ticket does not exist. I shall create the ticket with Category: '+obj.context.category+' and Sub-Category: '+obj.context.sub_category+'. Would you like to add urgency? (Enter Yes/No)';
                     this.appendMessage(responseMesg,obj);
                 }
-                else if (obj.output.action === 'fetch_date') {
-                    responseMesg = 'Current date is '+new Date().toLocaleDateString();
+                else if(obj.output.action === 'create_ticket')
+                {
+                    // Make api call to create ticket
+                    if(obj.context.Urgency === undefined && obj.context.comments === undefined)
+                    {
+                        responseMesg = 'Thanks for the information. A ticket with default urgency(Low) has been created. We will get back to you soon.';
+                    }
+                    else if(obj.context.Urgency != undefined && obj.context.comments === undefined)
+                    {
+                        responseMesg = 'Thanks for the information. A ticket with Urgency: '+obj.context.Urgency +' has been created. We will get back to you soon.';
+                    }
+                    else if(obj.context.Urgency === undefined && obj.context.comments != undefined)
+                    {
+                        responseMesg = 'Thanks for the information. A ticket with default urgency(Low) and Comments: '+obj.context.comments+' has been created. We will get back to you soon.';
+                    }
+                    else
+                    {
+                        responseMesg = 'Thanks for the information. A ticket with Urgency: '+obj.context.Urgency +' and Comments: '+obj.context.comments+' has been created. We will get back to you soon.';
+                    }
                     this.appendMessage(responseMesg,obj);
+                    obj.context.Urgency = undefined;
+                    obj.context.comments = undefined;
                 }
-                else if (obj.output.action === 'fetch_weather') {
-                    this.weatherservice.getWeatherUpdates({'lat':15.57,'long':73.32}).subscribe(weatherResponse=>{
-                    responseMesg = weatherResponse;
-                    this.appendMessage(responseMesg,obj);
-                });
-            }
-        }         
+            //}
+        //     else {
+        //         if (obj.output.action === 'fetch_time') {
+        //             responseMesg = 'Current time is '+new Date().toLocaleTimeString();
+        //             this.appendMessage(responseMesg,obj);
+        //         }
+        //         else if (obj.output.action === 'fetch_date') {
+        //             responseMesg = 'Current date is '+new Date().toLocaleDateString();
+        //             this.appendMessage(responseMesg,obj);
+        //         }
+        //         else if (obj.output.action === 'fetch_weather') {
+        //             this.weatherservice.getWeatherUpdates({'lat':15.57,'long':73.32}).subscribe(weatherResponse=>{
+        //             responseMesg = weatherResponse;
+        //             this.appendMessage(responseMesg,obj);
+        //         });
+        //     }
+        // }         
     });
     }
 
